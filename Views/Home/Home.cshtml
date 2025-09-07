@@ -1,0 +1,204 @@
+﻿<!--menu link-->
+@Html.Partial("_Menu")
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Poppins&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- internal Styling -->
+<style>
+
+
+    .home_body {
+        background-image: url("https://wiki.nytolia.net/~gitbook/ogimage/jpVroBMZeJYmHIFDVjwv");
+        height: auto;
+        min-height: 45vh;
+        background-size: cover;
+        background-position: center;
+        width: 95.7%;
+        padding: 3rem 2rem;
+        color: #555;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        text-align: center;
+    }
+
+        .home_body h1 {
+            color: #3b82f6;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .home_body p {
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 1000px;
+            margin: auto;
+            color: #e2e2e2;
+        }
+
+    /* Features Section */
+    .features {
+        width: 90%;
+        margin: 5rem auto 2rem auto;
+        text-align: center;
+    }
+
+        .features h1 {
+            font-size: 2rem;
+            color: #111827;
+        }
+
+        .features p {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 3rem;
+        }
+
+    .row {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    .features_column {
+        flex: 1 1 45%;
+        background: #e6f2ff;
+        border-radius: 10px;
+        padding: 1.5rem;
+        text-align: left;
+        display: flex;
+        align-items: flex-start;
+        gap: 1.2rem;
+        box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+        .features_column img {
+            height: 100px;
+            border-radius: 20%;
+            object-fit: cover;
+        }
+
+        .features_column p {
+            font-size: 0.95rem;
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .features_column button {
+            padding: 8px 16px;
+            background-color: #111827;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .features_column button:hover {
+                background-color: #004ccc;
+            }
+    /* Footer */
+    .footer {
+        width: 95.6%;
+        text-align: center;
+        padding: 2rem;
+        background-color: #0d1b2a;
+        color: white;
+        margin-top: 5rem;
+    }
+
+        .footer h3 {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer p {
+            font-size: 0.95rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem auto;
+            color: #dbe2ef;
+        }
+
+        .footer .icons i {
+            font-size: 1.2rem;
+            margin: 0 10px;
+            color: #3f88c5;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+            .footer .icons i:hover {
+                transform: scale(1.2);
+                color: #90e0ef;
+            }
+
+</style>
+
+<!-- Home Section -->
+<div class="home_body">
+    <h1>Welcome to the Contract Monthly Claim System <strong><em>(CMCS)</em></strong></h1>
+    <p>
+        The Contract Monthly Claim System (CMCS) is a digital platform designed to simplify and improve how academic claims are submitted, reviewed, and finalized within an institution.
+        Traditionally, these claims are handled through manual or partly digital processes, often resulting in delays, lost paperwork, and lack of transparency.
+        CMCS addresses these challenges by providing a secure and user-friendly online system where lecturers can register, log in, and submit claims with all necessary details.
+        Programme coordinators can review, approve or reject claims, while programme management finalizes decisions. This structured workflow ensures accountability and transparency at every step.
+    </p>
+</div>
+
+<!-- Features -->
+<div class="features">
+    <h1>What Are Some Of Our Features</h1>
+    <p>Our features are simple, efficient, and easy to use.</p>
+
+    <div class="row">
+        <div class="features_column">
+            <img src="https://media1.tenor.com/m/1vwVyZbs2JIAAAAC/claimnow.gif" alt="Submit Claim" />
+            <div>
+                <p>
+                    The Submit Claim feature allows lecturers to easily submit their academic claims through a secure and user-friendly form.
+                    Lecturers can provide details like sessions, hours, rates, and upload supporting documents. Claims are recorded with submission dates and set to a "Pending" status for processing.
+                </p>
+                <a href="@Url.Action("SubmitClaim", "Home")">
+                    <button><i class="fa fa-paper-plane"></i> Submit Claim</button>
+                </a>
+            </div>
+        </div>
+
+        <div class="features_column">
+            <img src="https://data.textstudio.com/output/sample/animated/7/3/1/5/claim-8-5137.gif" alt="Track Claim" />
+            <div>
+                <p>
+                    The Track Claim feature gives lecturers a full view of their submitted claims, including statuses like Pending, Approved, Rejected, or Finalized.
+                    Claims are displayed with key details and real-time updates, ensuring transparency throughout the approval process.
+                </p>
+                <a href="@Url.Action("TrackClaim", "Home")">
+                    <button><i class="fa fa-line-chart"></i> Track Claim</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <hr />
+    <h3>About Us</h3>
+    <p>
+        At LayeredLogic, we transform visions into reality through web applications and an unwavering commitment to excellence.
+    </p>
+    <div class="icons">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-linkedin"></i>
+        <i class="fa-brands fa-telegram"></i>
+    </div>
+    <br />
+    <p>
+        &copy; 2025 Contract Monthly Claim System (CMCS) | Created by Matlhaga Amogelang
+    </p>
+</div>
+

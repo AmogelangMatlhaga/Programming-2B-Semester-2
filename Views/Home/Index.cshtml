@@ -1,0 +1,114 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!--font awesome link-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!--internal styling-->
+<style>
+    body {
+        background-color: #0b1f4a;
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .contain_form {
+        text-align: center;
+        margin-top: 150px;
+    }
+
+    .register_form {
+        display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+        margin: auto;
+        text-align: start;
+        border-radius: 10px;
+        padding: 30px;
+        background-color: #0f2d66;
+        transition: 0.3s;
+    }
+
+        .register_form label {
+            width: 100%;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .register_form input[type="text"],
+        .register_form input[type="password"] {
+            height: 2.5rem;
+            width: 100%;
+            border-radius: 6px;
+            background-color: #122b64;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 1rem;
+        }
+
+        .register_form .button_login {
+            background-color: #1e4fa3;
+            color: white;
+            margin-top: 1.5rem;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+            .register_form .button_login:hover {
+                background-color: #3a74d8;
+            }
+
+        .register_form h2 {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+    .register_footer {
+        margin-top: 20px;
+        font-size: 0.9rem;
+        color: #cccccc;
+    }
+
+        .register_footer a {
+            text-decoration: none;
+            color: #4ea0f1;
+        }
+
+            .register_footer a:hover {
+                text-decoration: underline;
+            }
+
+    ::placeholder {
+        color: #b0c4de;
+    }
+</style>
+
+<!--creating the login form-->
+<div class="contain_form">
+    <form asp-action="user_login" method="post" enctype="multipart/form-data" class="register_form">
+        <h2>
+            <i class="fa fa-user-circle" style="font-size: 4rem; color: #4ea0f1;"></i><br />
+            Login
+        </h2>
+        <label>Email</label>
+        <input type="text" id="Email" name="Email" placeholder="Enter your email" />
+
+        <label>Password</label>
+        <input type="password" id="Password" name="Password" placeholder="Enter your password" />
+
+        <input type="submit" value="Login" class="button_login" />
+    </form>
+
+    <div class="register_footer">
+        If you don't have an account, <a href="@Url.Action("Register", "Home")">Register</a>
+    </div>
+</div>

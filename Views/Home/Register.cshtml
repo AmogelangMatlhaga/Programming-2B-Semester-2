@@ -1,0 +1,142 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!--font awesome link-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!--internal styling-->
+<style>
+    body {
+        background-color: #0b1f4a;
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .contain_form {
+        text-align: center;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .register_form {
+        display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+        margin: auto;
+        text-align: start;
+        border-radius: 10px;
+        padding: 30px;
+        background-color: #0f2d66;
+        transition: 0.3s;
+    }
+
+        .register_form label {
+            width: 100%;
+            margin-top: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .register_form input,
+        .register_form select {
+            height: 2.5rem;
+            width: 100%;
+            border-radius: 6px;
+            background-color: #122b64;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 1rem;
+        }
+
+        .register_form .button_register {
+            background-color: #1e4fa3;
+            color: white;
+            margin-top: 1.5rem;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+            .register_form .button_register:hover {
+                background-color: #3a74d8;
+            }
+
+        .register_form h2 {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+    .form_footer {
+        margin-top: 20px;
+        font-size: 0.9rem;
+        color: #cccccc;
+    }
+
+        .form_footer a {
+            color: #4ea0f1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            .form_footer a:hover {
+                text-decoration: underline;
+            }
+
+    ::placeholder {
+        color: #b0c4de;
+    }
+</style>
+
+<!--creating the registration page-->
+<div class="contain_form">
+    <form class="register_form">
+        <h2>
+            <i class="fa fa-users" style="font-size: 4rem; color: #4ea0f1;"></i><br />
+            Register
+        </h2>
+
+        <label>First Name</label>
+        <input type="text" id="FirstName" />
+
+        <label>Surname</label>
+        <input type="text" id="Surname" />
+
+        <label>Email</label>
+        <input type="text" id="Email" />
+
+        <label>Gender</label>
+        <select>
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="non-binary">Non-Binary</option>
+        </select>
+
+        <label>Role</label>
+        <select>
+            <option value="">Select Role</option>
+            <option value="lecturer">Lecturer</option>
+            <option value="programme coordinator">Programme Coordinator</option>
+            <option value="programme manager">Programme Manager</option>
+        </select>
+
+        <label>Password</label>
+        <input type="password" id="Password" />
+
+        <input type="submit" value="Register" class="button_register" />
+    </form>
+
+    <div class="form_footer">
+        If you have an account, <a href="@Url.Action("Index", "Home")">Login</a>
+    </div>
+</div>
+

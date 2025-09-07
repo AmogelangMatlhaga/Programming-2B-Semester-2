@@ -1,0 +1,192 @@
+﻿<!--icon link-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+@Html.Partial("_Menu")
+
+<!-- creating the lecturer dashboard -->
+<!--internal styling-->
+<style>
+
+    .form-row {
+        display: flex;
+        gap: 20px;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .form-group {
+        flex: 1;
+        min-width: 45%;
+    }
+
+    .contain_claim {
+        text-align: center;
+        display: block;
+        width: 100%;
+        margin-top: 40px;
+    }
+
+    .claim_form {
+        display: flex;
+        flex-wrap: wrap;
+        width: 90%;
+        margin: auto;
+        text-align: start;
+        box-sizing: border-box;
+        border-radius: 10px;
+        padding: 20px;
+        background-color: white;
+        transition: 0.5s;
+        border-color: dodgerblue;
+    }
+
+        .claim_form label {
+            width: 100%;
+            margin-top: 20px;
+            font-weight: bold;
+            color: black;
+        }
+
+        .claim_form input,
+        .claim_form select {
+            height: 2rem;
+            width: 100%;
+            border-radius: 5px;
+            background-color: white;
+            color: #046df6;
+            border: 1px solid skyblue;
+            margin-top: 5px;
+            padding: 5px;
+        }
+
+        .claim_form h2 {
+            width: 100%;
+            text-align: center;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            margin-bottom: 1rem;
+        }
+
+    /* Footer */
+    .footer {
+        width: 95.6%;
+        text-align: center;
+        padding: 2rem;
+        background-color: #0d1b2a;
+        color: white;
+        margin-top: 5rem;
+    }
+
+        .footer h3 {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer p {
+            font-size: 0.95rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem auto;
+            color: #dbe2ef;
+        }
+
+        .footer .icons i {
+            font-size: 1.2rem;
+            margin: 0 10px;
+            color: #3f88c5;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+            .footer .icons i:hover {
+                transform: scale(1.2);
+                color: #90e0ef;
+            }
+
+</style>
+
+
+<!--creating an html form-->
+<div class="contain_claim">
+    <form class="claim_form">
+        <h2>
+            <i class="fa fa-folder-open" style="font-size:5rem;color:#046df6;"></i><br />
+            Submit Your Claim
+        </h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Number of Sessions:</label>
+                <input type="number" id="Sessions" onmouseout="total_calculate()" />
+            </div>
+            <div class="form-group">
+                <label>Number of Hours:</label>
+                <input type="number" id="Hours" />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Rate Amount (R):</label>
+                <input type="number" id="Rate" onmouseout="total_calculate()" />
+            </div>
+            <div class="form-group">
+                <label>Total Amount</label>
+                <input type="number" id="price" value="10" />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Module Name</label>
+                <input type="text" id="module" />
+            </div>
+            <div class="form-group">
+                <label>Faculty Name</label>
+                <input type="text" id="faculty" />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Upload Supporting Documents</label>
+                <input type="file" id="documents" />
+            </div>
+        </div>
+
+        <input type="submit" value="submit claim" class="button_claim" />
+
+    </form>
+</div>
+<!-- function to calculate the total amount -->
+<script>
+    function total_calculate(){
+    //alert("on calculate");
+    var sessionNumber = document.getElementById("Sessions").value;
+    var rateAmount = document.getElementById("Rate").value;
+    var Total = Number(sessionNumber) * Number(rateAmount);
+    document.getElementById("price").value = Total;
+
+    //alert(sessionNumber);
+
+    }
+
+    function total_rate(){
+        var rateAmount = document.getElementById("Rate").value;
+        alert(rateAmount);
+    }
+
+</script>
+
+<!--Footer -->
+
+<div class="footer">
+    <hr />
+    <h3>About Us</h3>
+    <p>At LayeredLogic,<br> We transform visions into reality through web applications and unwavering commitment to excellence.<br></p>
+    <div class="icons">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-linkedin"></i>
+        <i class="fa-brands fa-telegram"></i>
+    </div>
+    <br />
+    copyright <i class="fa-regular fa-copyright"></i> 2025, Contract Monthly Claim System (CMCS) | Created by Matlhaga Amogelang
+</div>

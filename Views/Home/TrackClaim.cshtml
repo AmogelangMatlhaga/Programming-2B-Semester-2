@@ -1,0 +1,266 @@
+﻿@Html.Partial("_Menu")
+
+<style>
+    .track_claims_container {
+        width: 97.6%;
+        margin: 40px auto;
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    h2 {
+        text-align: start;
+        margin-bottom: 20px;
+        color: #111827;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        background-color: #0b1f4a;
+        color: #ffffff;
+    }
+
+        table thead {
+            background-color: #06224d;
+            color: #ffffff;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: center;
+            border: none;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #122b64;
+        }
+
+    .status {
+        font-weight: bold;
+        padding: 6px 12px;
+        border-radius: 6px;
+    }
+
+        .status.pending {
+            color: #ffc107;
+        }
+
+        .status.approved {
+            color: #28a745;
+        }
+
+        .status.rejected {
+            color: #dc3545;
+        }
+
+        .status.finalized {
+            color: #17a2b8;
+        }
+
+    .btn {
+        padding: 6px 12px;
+        text-decoration: none;
+        background: #1e4fa3;
+        color: white;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+        .btn:hover {
+            background: #3a74d8;
+        }
+
+    /* Footer */
+    .footer {
+        width: 95.6%;
+        text-align: center;
+        padding: 2rem;
+        background-color: #0d1b2a;
+        color: white;
+        margin-top: 5rem;
+    }
+
+        .footer h3 {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer p {
+            font-size: 0.95rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem auto;
+            color: #dbe2ef;
+        }
+
+        .footer .icons i {
+            font-size: 1.2rem;
+            margin: 0 10px;
+            color: #3f88c5;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+            .footer .icons i:hover {
+                transform: scale(1.2);
+                color: #90e0ef;
+            }
+
+</style>
+
+<div class="track_claims_container">
+    <h2>Track Your Claims</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Sessions</th>
+                <th>Hours</th>
+                <th>Rate</th>
+                <th>Total Amount</th>
+                <th>Module</th>
+                <th>Faculty</th>
+                <th>Supporting Document</th>
+                <th>Status</th>
+                <th>Date Submitted</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>5</td>
+                <td>10</td>
+                <td>R250</td>
+                <td>R2500</td>
+                <td>Programming 2B</td>
+                <td>ICT Faculty</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status pending">Pending</span></td>
+                <td>2025-09-02</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>3</td>
+                <td>6</td>
+                <td>R300</td>
+                <td>R1800</td>
+                <td>Databases</td>
+                <td>ICT Faculty</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status approved">Approved</span></td>
+                <td>2025-08-28</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>4</td>
+                <td>8</td>
+                <td>R200</td>
+                <td>R1600</td>
+                <td>System Analysis</td>
+                <td>ICT Faculty</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status rejected">Rejected</span></td>
+                <td>2025-08-20</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>4</td>
+                <td>8</td>
+                <td>R200</td>
+                <td>R1600</td>
+                <td>System Analysis</td>
+                <td>ICT Faculty</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status pending">Pending</span></td>
+                <td>2025-08-20</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>9</td>
+                <td>18</td>
+                <td>R200</td>
+                <td>R3600</td>
+                <td>System Analysis</td>
+                <td>ICT Faculty</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status pending">Pending</span></td>
+                <td>2025-08-20</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>4</td>
+                <td>8</td>
+                <td>R150</td>
+                <td>R1200</td>
+                <td>Web Development</td>
+                <td>ICT Faculty</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status rejected">Rejected</span></td>
+                <td>2025-08-20</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>8</td>
+                <td>16</td>
+                <td>R300</td>
+                <td>R4800</td>
+                <td>Databases</td>
+                <td>ICT Faculty</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status approved">Approved</span></td>
+                <td>2025-08-28</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>4</td>
+                <td>8</td>
+                <td>R200</td>
+                <td>R1600</td>
+                <td>System Analysis</td>
+                <td>ICT Faculty</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status rejected">Rejected</span></td>
+                <td>2025-08-20</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>5</td>
+                <td>10</td>
+                <td>R250</td>
+                <td>R2500</td>
+                <td>Programming 2B</td>
+                <td>ICT Faculty</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status pending">Pending</span></td>
+                <td>2025-09-02</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>4</td>
+                <td>8</td>
+                <td>R200</td>
+                <td>R1600</td>
+                <td>System Analysis</td>
+                <td>ICT Faculty</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status rejected">Rejected</span></td>
+                <td>2025-08-20</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="footer">
+    <hr />
+    <h3>About Us</h3>
+    <p>At LayeredLogic,<br> We transform visions into reality through web applications and unwavering commitment to excellence.<br></p>
+    <div class="icons">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-linkedin"></i>
+        <i class="fa-brands fa-telegram"></i>
+    </div>
+    <br />
+    copyright <i class="fa-regular fa-copyright"></i> 2025, Contract Monthly Claim System (CMCS) | Created by Matlhaga Amogelang
+</div>

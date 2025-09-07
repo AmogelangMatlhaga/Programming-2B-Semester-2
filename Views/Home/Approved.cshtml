@@ -1,0 +1,239 @@
+﻿<!--menu link-->
+@Html.Partial("_Menu")
+
+<!--internal styling -->
+<style>
+    .claims_container {
+        width: 97%;
+        margin: 40px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    h2 {
+        text-align: start;
+        margin-bottom: 20px;
+        color: #111827;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        background-color: #0b1f4a;
+        color: #ffffff;
+    }
+
+        table thead {
+            background-color: #06224d;
+            color: #ffffff;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: center;
+            border: none;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #122b64;
+        }
+
+    .btn {
+        padding: 6px 12px;
+        text-decoration: none;
+        background: #1e4fa3;
+        color: white;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+        .btn:hover {
+            background: #3a74d8;
+        }
+
+    .status {
+        font-weight: bold;
+        padding: 6px 12px;
+        border-radius: 6px;
+    }
+
+        .status.finalized {
+            color: limegreen;
+        }
+
+        .status.rejected {
+            color: red;
+        }
+
+
+    /* Footer */
+    .footer {
+        width: 95.6%;
+        text-align: center;
+        padding: 2rem;
+        background-color: #0d1b2a;
+        color: white;
+        margin-top: 5rem;
+    }
+
+        .footer h3 {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer p {
+            font-size: 0.95rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem auto;
+            color: #dbe2ef;
+        }
+
+        .footer .icons i {
+            font-size: 1.2rem;
+            margin: 0 10px;
+            color: #3f88c5;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+            .footer .icons i:hover {
+                transform: scale(1.2);
+                color: #90e0ef;
+            }
+</style>
+
+<!--creating the approved claims table-->
+<div class="claims_container">
+    <h2>Finalized Claims</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Lecturer</th>
+                <th>Module</th>
+                <th>Faculty</th>
+                <th>Total Amount</th>
+                <th>Supporting Document</th>
+                <th>Status</th>
+                <th>Date Finalized</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Amo Matlhaga</td>
+                <td>Programming 2B</td>
+                <td>ICT Faculty</td>
+                <td>R2500</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status finalized">Finalized</span></td>
+                <td>2025-09-02</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Amo Matlhaga</td>
+                <td>Database</td>
+                <td>ICT Faculty</td>
+                <td>R1800</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status rejected">Rejected</span></td>
+                <td>2025-09-02</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Amo Matlhaga</td>
+                <td>System Analysis</td>
+                <td>ICT Faculty</td>
+                <td>R1600</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status finalized">Finalized</span></td>
+                <td>2025-09-02</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Amo Matlhaga</td>
+                <td>System Analysis</td>
+                <td>ICT Faculty</td>
+                <td>R1600</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status finalized">Finalized</span></td>
+                <td>2025-09-02</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Amo Matlhaga</td>
+                <td>System Analysis</td>
+                <td>ICT Faculty</td>
+                <td>R3600</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status finalized">Finalized</span></td>
+                <td>2025-09-02</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Amo Matlhaga</td>
+                <td>Web-Development</td>
+                <td>ICT Faculty</td>
+                <td>R1200</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status finalized">Finalized</span></td>
+                <td>2025-09-02</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Amo Matlhaga</td>
+                <td>Database</td>
+                <td>ICT Faculty</td>
+                <td>R4800</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status rejected">Rejected</span></td>
+                <td>2025-09-02</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Amo Matlhaga</td>
+                <td>System Analysis</td>
+                <td>ICT Faculty</td>
+                <td>R1600</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status finalized">Finalized</span></td>
+                <td>2025-09-02</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Amo Matlhaga</td>
+                <td>Programming 2B</td>
+                <td>ICT Faculty</td>
+                <td>R2500</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status finalized">Finalized</span></td>
+                <td>2025-09-02</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Amo Matlhaga</td>
+                <td>System Analysis</td>
+                <td>ICT Faculty</td>
+                <td>R1600</td>
+                <td><a href="#" class="btn">View</a></td>
+                <td><span class="status rejected">Rejected</span></td>
+                <td>2025-09-02</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="footer">
+    <hr />
+    <h3>About Us</h3>
+    <p>At LayeredLogic,<br> We transform visions into reality through web applications and unwavering commitment to excellence.<br></p>
+    <div class="icons">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-linkedin"></i>
+        <i class="fa-brands fa-telegram"></i>
+    </div>
+    <br />
+    copyright <i class="fa-regular fa-copyright"></i> 2025, Contract Monthly Claim System (CMCS) | Created by Matlhaga Amogelang
+</div>

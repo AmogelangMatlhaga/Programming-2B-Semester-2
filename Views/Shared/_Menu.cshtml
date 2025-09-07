@@ -1,0 +1,104 @@
+﻿<!-- icon link -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- menu internal styling -->
+<style>
+    .menu {
+        width: 100%;
+        height: 5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #111827;
+        color: white;
+        position: relative;
+    }
+
+    .logo {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 1rem;
+        font-weight: bold;
+        margin-left: 5px;
+    }
+
+    .options {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        margin-right: 5px;
+    }
+
+        .options a button {
+            padding: 5px 10px;
+            border: none;
+            background-color: transparent;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+    /* responsiveness and toogle styling */
+    #menu-toggle {
+        display: none;
+    }
+
+    .menu-icon {
+        display: none;
+        font-size: 26px;
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+    @@media (max-width: 768px) {
+        .options {
+            display: none;
+            flex-direction: column;
+            background: dodgerblue;
+            position: absolute;
+            top: 3rem;
+            right: 0;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        #menu-toggle:checked ~ .options {
+            display: inline-flex;
+            position: center;
+        }
+
+        .menu-icon {
+            display: block;
+        }
+    }
+</style>
+
+<div class="menu">
+    <div class="logo">
+        <p>CMCS</p>
+    </div>
+
+    <!-- toogle checkbox -->
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-icon">☰</label>
+
+    <div class="options">
+        <a href="@Url.Action("Home", "Home")"><button><i class="fa fa-university" style="font-size:15px;color:#050ce6;"></i> Home</button></a>
+        <a href="@Url.Action("SubmitClaim", "Home")"><button><i class="fa fa-paper-plane" style="font-size:15px;color:#0919f6;"></i> Submit Claim</button></a>
+        <a href="@Url.Action("TrackClaim", "Home")"><button><i class="fa fa-line-chart" style="font-size:15px;color:#0919f6;"></i> Track Claim</button></a>
+        <a href="@Url.Action("PreApproved", "Home")"><button><i class="fa fa-share-square" style="font-size:15px;color:#0919f6;"></i> Pre-Approved Claim</button></a>
+        <a href="@Url.Action("Approved", "Home")"><button><i class="fa fa-rocket" style="font-size:15px;color:#0919f6;"></i> Approve Claim</button></a>
+        <i class="fa fa-user" style="
+  font-size: 15px;
+  color: #0919f6;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+cursor:pointer;
+"></i>
+    </div>
+</div>

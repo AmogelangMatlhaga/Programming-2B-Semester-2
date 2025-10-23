@@ -4,8 +4,11 @@ using System.Diagnostics;
 
 namespace part1_poe.Models
 {
+
     public class CreateInstanceDBandTables
     {
+        //global variables for the connection string
+
         private string instanceName = "claim_system";
         private string databaseName = "claims_database";
         private string connectionStringToInstance => $@"Server=(localdb)\{instanceName};Integrated Security=true;";

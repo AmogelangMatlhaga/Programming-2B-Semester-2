@@ -2,6 +2,7 @@
 {
     public class pre_approve
     {
+        //declared getters and setters
         public int ClaimID { get; set; }
         public int NumberOfSessions { get; set; }     
         public int NumberOfHours { get; set; }        

@@ -4,6 +4,7 @@ namespace part1_poe.Models
 {
     public class register
     {
+        //prompted all the fields on the registered page to be required
 
         [Required(ErrorMessage = "First name is required")]
         [Display(Name = "First Name")]

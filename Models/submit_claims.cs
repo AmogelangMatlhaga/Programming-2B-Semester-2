@@ -4,6 +4,7 @@ namespace part1_poe.Models
 {
     public class submit_claims
     {
+        //requiring all the fields on the claims form
         [Required(ErrorMessage = "Number of sessions is required")]
         [Range(1, int.MaxValue, ErrorMessage = "Sessions must be at least 1")]
         public int Sessions { get; set; }

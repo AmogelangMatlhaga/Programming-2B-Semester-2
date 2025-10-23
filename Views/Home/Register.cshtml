@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model part1_poe.Models.register
 
 <!--font awesome link-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -96,41 +92,46 @@
     }
 </style>
 
-<!--creating the registration page-->
 <div class="contain_form">
-    <form class="register_form">
+    <form asp-action="Register" method="post" enctype="multipart/form-data" class="register_form">
         <h2>
             <i class="fa fa-users" style="font-size: 4rem; color: #4ea0f1;"></i><br />
             Register
         </h2>
 
-        <label>First Name</label>
-        <input type="text" id="FirstName" />
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" placeholder="Enter your first name" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
 
-        <label>Surname</label>
-        <input type="text" id="Surname" />
+        <label asp-for="Surname"></label>
+        <input asp-for="Surname" class="form-control" placeholder="Enter your surname" />
+        <span asp-validation-for="Surname" class="text-danger"></span>
 
-        <label>Email</label>
-        <input type="text" id="Email" />
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" placeholder="Enter your email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
 
-        <label>Gender</label>
-        <select>
+        <label asp-for="Gender"></label>
+        <select asp-for="Gender" class="form-control">
             <option value="">Select Gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="non-binary">Non-Binary</option>
         </select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
 
-        <label>Role</label>
-        <select>
+        <label asp-for="Role"></label>
+        <select asp-for="Role" class="form-control">
             <option value="">Select Role</option>
             <option value="lecturer">Lecturer</option>
             <option value="programme coordinator">Programme Coordinator</option>
             <option value="programme manager">Programme Manager</option>
         </select>
+        <span asp-validation-for="Role" class="text-danger"></span>
 
-        <label>Password</label>
-        <input type="password" id="Password" />
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" placeholder="Enter your password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
 
         <input type="submit" value="Register" class="button_register" />
     </form>
@@ -139,4 +140,7 @@
         If you have an account, <a href="@Url.Action("Index", "Home")">Login</a>
     </div>
 </div>
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
 

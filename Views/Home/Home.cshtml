@@ -148,6 +148,9 @@
         Programme coordinators can review, approve or reject claims, while programme management finalizes decisions. This structured workflow ensures accountability and transparency at every step.
     </p>
 </div>
+@{
+    string? userRole = Context.Session.GetString("role");
+}
 
 <!-- Features -->
 <div class="features">
@@ -155,31 +158,80 @@
     <p>Our features are simple, efficient, and easy to use.</p>
 
     <div class="row">
-        <div class="features_column">
-            <img src="https://media1.tenor.com/m/1vwVyZbs2JIAAAAC/claimnow.gif" alt="Submit Claim" />
-            <div>
-                <p>
-                    The Submit Claim feature allows lecturers to easily submit their academic claims through a secure and user-friendly form.
-                    Lecturers can provide details like sessions, hours, rates, and upload supporting documents. Claims are recorded with submission dates and set to a "Pending" status for processing.
-                </p>
-                <a href="@Url.Action("SubmitClaim", "Home")">
-                    <button><i class="fa fa-paper-plane"></i> Submit Claim</button>
-                </a>
-            </div>
-        </div>
 
-        <div class="features_column">
-            <img src="https://data.textstudio.com/output/sample/animated/7/3/1/5/claim-8-5137.gif" alt="Track Claim" />
-            <div>
-                <p>
-                    The Track Claim feature gives lecturers a full view of their submitted claims, including statuses like Pending, Approved, Rejected, or Finalized.
-                    Claims are displayed with key details and real-time updates, ensuring transparency throughout the approval process.
-                </p>
-                <a href="@Url.Action("TrackClaim", "Home")">
-                    <button><i class="fa fa-line-chart"></i> Track Claim</button>
-                </a>
+        <!-- Lecturer Features -->
+        @if (userRole == "lecturer")
+        {
+            <div class="features_column">
+                <img src="https://media1.tenor.com/m/1vwVyZbs2JIAAAAC/claimnow.gif" alt="Submit Claim" />
+                <div>
+                    <p>
+                        The Submit Claim feature allows lecturers to easily submit their academic claims through a secure and user-friendly form.
+                        Lecturers can provide details like sessions, hours, rates, and upload supporting documents.
+                        Claims are recorded with submission dates and set to a "Pending" status for processing.
+                    </p>
+                    <a href="@Url.Action("SubmitClaim", "Home")">
+                        <button style="background-color:#007bff;color:white;border:none;padding:8px 15px;border-radius:5px;">
+                            <i class="fa fa-paper-plane"></i> Submit Claim
+                        </button>
+                    </a>
+                </div>
             </div>
-        </div>
+
+            <div class="features_column">
+                <img src="https://data.textstudio.com/output/sample/animated/7/3/1/5/claim-8-5137.gif" alt="Track Claim" />
+                <div>
+                    <p>
+                        The Track Claim feature gives lecturers a full view of their submitted claims, including statuses like Pending, Approved, Rejected, or Finalized.
+                        Claims are displayed with key details and real-time updates, ensuring transparency throughout the approval process.
+                    </p>
+                    <a href="@Url.Action("TrackClaim", "Home")">
+                        <button style="background-color:#28a745;color:white;border:none;padding:8px 15px;border-radius:5px;">
+                            <i class="fa fa-line-chart"></i> Track Claim
+                        </button>
+                    </a>
+                </div>
+            </div>
+        }
+
+        <!-- Programme Coordinator Features -->
+        @if (userRole == "programme coordinator")
+        {
+            <div class="features_column">
+                <img src="https://media.tenor.com/Jhsdj6Y1GlEAAAAM/manage-review.gif" alt="Pre-Approve" />
+                <div>
+                    <p>
+                        As a Programme Coordinator, you can pre-approve submitted lecturer claims before they move to the Programme Manager for final approval.
+                        This step ensures all claims are valid and complete.
+                    </p>
+                    <a href="@Url.Action("PreApproved", "Home")">
+                        <button style="background-color:#f39c12;color:white;border:none;padding:8px 15px;border-radius:5px;">
+                            <i class="fa fa-check-square"></i> Pre-Approve Claims
+                        </button>
+                    </a>
+                </div>
+            </div>
+        }
+
+        <!-- Programme Manager Features -->
+        @if (userRole == "programme manager")
+        {
+            <div class="features_column">
+                <img src="https://media.tenor.com/NUExrYqZzN8AAAAM/approved.gif" alt="Approve Claims" />
+                <div>
+                    <p>
+                        As a Programme Manager, you have the authority to review and approve claims that have been pre-approved by the Programme Coordinator.
+                        Approved claims are finalized and ready for processing.
+                    </p>
+                    <a href="@Url.Action("Approved", "Home")">
+                        <button style="background-color:#17a2b8;color:white;border:none;padding:8px 15px;border-radius:5px;">
+                            <i class="fa fa-thumbs-up"></i> Approve Claims
+                        </button>
+                    </a>
+                </div>
+            </div>
+        }
+
     </div>
 </div>
 

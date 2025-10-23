@@ -1,4 +1,6 @@
 ﻿<!--menu link-->
+@using System.Linq
+@model List<part1_poe.Models.pre_approve>
 @Html.Partial("_Menu")
 
 <!--internal styling -->
@@ -103,127 +105,77 @@
             }
 </style>
 
-<!--creating the approved claims table-->
+
+
+
+
+<!--creating the pre-approved claims table-->
 <div class="claims_container">
-    <h2>Finalized Claims</h2>
+    <h2>Pre-Approved Claims</h2>
     <table>
         <thead>
             <tr>
-                <th>#</th>
+                <th>No</th>
                 <th>Lecturer</th>
                 <th>Module</th>
                 <th>Faculty</th>
                 <th>Total Amount</th>
                 <th>Supporting Document</th>
                 <th>Status</th>
-                <th>Date Finalized</th>
+                <th>Date Submitted</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Amo Matlhaga</td>
-                <td>Programming 2B</td>
-                <td>ICT Faculty</td>
-                <td>R2500</td>
-                <td><a href="#" class="btn">View</a></td>
-                <td><span class="status finalized">Finalized</span></td>
-                <td>2025-09-02</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Amo Matlhaga</td>
-                <td>Database</td>
-                <td>ICT Faculty</td>
-                <td>R1800</td>
-                <td><a href="#" class="btn">View</a></td>
-                <td><span class="status rejected">Rejected</span></td>
-                <td>2025-09-02</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Amo Matlhaga</td>
-                <td>System Analysis</td>
-                <td>ICT Faculty</td>
-                <td>R1600</td>
-                <td><a href="#" class="btn">View</a></td>
-                <td><span class="status finalized">Finalized</span></td>
-                <td>2025-09-02</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Amo Matlhaga</td>
-                <td>System Analysis</td>
-                <td>ICT Faculty</td>
-                <td>R1600</td>
-                <td><a href="#" class="btn">View</a></td>
-                <td><span class="status finalized">Finalized</span></td>
-                <td>2025-09-02</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Amo Matlhaga</td>
-                <td>System Analysis</td>
-                <td>ICT Faculty</td>
-                <td>R3600</td>
-                <td><a href="#" class="btn">View</a></td>
-                <td><span class="status finalized">Finalized</span></td>
-                <td>2025-09-02</td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>Amo Matlhaga</td>
-                <td>Web-Development</td>
-                <td>ICT Faculty</td>
-                <td>R1200</td>
-                <td><a href="#" class="btn">View</a></td>
-                <td><span class="status finalized">Finalized</span></td>
-                <td>2025-09-02</td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>Amo Matlhaga</td>
-                <td>Database</td>
-                <td>ICT Faculty</td>
-                <td>R4800</td>
-                <td><a href="#" class="btn">View</a></td>
-                <td><span class="status rejected">Rejected</span></td>
-                <td>2025-09-02</td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>Amo Matlhaga</td>
-                <td>System Analysis</td>
-                <td>ICT Faculty</td>
-                <td>R1600</td>
-                <td><a href="#" class="btn">View</a></td>
-                <td><span class="status finalized">Finalized</span></td>
-                <td>2025-09-02</td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>Amo Matlhaga</td>
-                <td>Programming 2B</td>
-                <td>ICT Faculty</td>
-                <td>R2500</td>
-                <td><a href="#" class="btn">View</a></td>
-                <td><span class="status finalized">Finalized</span></td>
-                <td>2025-09-02</td>
-            </tr>
-            <tr>
-                <td>10</td>
-                <td>Amo Matlhaga</td>
-                <td>System Analysis</td>
-                <td>ICT Faculty</td>
-                <td>R1600</td>
-                <td><a href="#" class="btn">View</a></td>
-                <td><span class="status rejected">Rejected</span></td>
-                <td>2025-09-02</td>
-            </tr>
+            @if (Model != null && Model.Any())
+            {
+                int i = 1;
+                foreach (var claim in Model)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@claim.names</td>
+                        <td>@claim.ModuleName</td>
+                        <td>@claim.FacultyName</td>
+                        <td>R @claim.TotalAmount</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(claim.SupportingDocument))
+                            {
+                                <a href="@Url.Content("~/files/" + claim.SupportingDocument)" class="btn" target="_blank">View</a>
+                            }
+                            else
+                            {
+                                <span>No File</span>
+                            }
+                        </td>
+                        <td>
+                            <span class="status @(claim.ClaimStatus.ToLower())">@claim.ClaimStatus</span>
+                        </td>
+                        <td>@claim.CreatingDate.ToString("yyyy-MM-dd")</td>
+                        <td>
+                            @if (claim.ClaimStatus.ToLower() != "pending" && claim.ClaimStatus.ToLower() != "rejected")
+                            {
+                                <a asp-action="ApproveClaim" asp-route-id="@claim.ClaimID" class="btn" style="margin-right:5px;">Approve</a>
+                                <a asp-action="RejectClaim" asp-route-id="@claim.ClaimID" class="btn btn-danger">Reject</a>
+                            }
+                            else
+                            {
+                                <span></span>
+                            }
+                        </td>
+                    </tr>
+                    i++;
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="9" style="text-align:center;">No claims found.</td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
-
 
 <!--footer-->
 <div style="height:6.5rem; width: 100%;"></div>

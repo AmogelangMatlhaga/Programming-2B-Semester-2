@@ -1,5 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@model part1_poe.Models.login
+
+@{
+    ViewData["Title"] = "Login Page";
 }
 
 <!--font awesome link-->
@@ -37,7 +40,7 @@
             color: #ffffff;
         }
 
-        .register_form input[type="text"],
+        .register_form input[type="email"],
         .register_form input[type="password"] {
             height: 2.5rem;
             width: 100%;
@@ -94,16 +97,23 @@
 
 <!--creating the login form-->
 <div class="contain_form">
-    <form asp-action="user_login" method="post" enctype="multipart/form-data" class="register_form">
+    <form asp-action="Index" method="post" enctype="multipart/form-data" class="register_form">
         <h2>
             <i class="fa fa-user-circle" style="font-size: 4rem; color: #4ea0f1;"></i><br />
             Login
         </h2>
-        <label>Email</label>
-        <input type="text" id="Email" name="Email" placeholder="Enter your email" />
 
-        <label>Password</label>
-        <input type="password" id="Password" name="Password" placeholder="Enter your password" />
+        <label asp-for="Email"></label>
+
+        <input asp-for="Email" type="email" class="form-control" placeholder="Enter your email" />
+        <span style="color:red" asp-validation-for="Email" class="text-danger"></span>
+
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" placeholder="Enter your password" />
+        <span style="color:red" asp-validation-for="Password" class="text-danger"></span>
+
+
+        <span style="color:red"  class="text-danger">@ViewBag.error</span>
 
         <input type="submit" value="Login" class="button_login" />
     </form>
@@ -112,3 +122,8 @@
         If you don't have an account, <a href="@Url.Action("Register", "Home")">Register</a>
     </div>
 </div>
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+
+

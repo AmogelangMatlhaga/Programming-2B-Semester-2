@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="wwwroot\images\claim done.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

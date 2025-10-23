@@ -72,33 +72,70 @@
         }
     }
 </style>
+@{
+    var role = ViewBag.role as string; 
+    var id = ViewBag.id as string;
+}
 
 <div class="menu">
     <div class="logo">
         <p>CMCS</p>
     </div>
 
-    <!-- toogle checkbox -->
+    <!-- toggle checkbox -->
     <input type="checkbox" id="menu-toggle">
     <label for="menu-toggle" class="menu-icon">☰</label>
 
     <div class="options">
-        <a href="@Url.Action("Home", "Home")"><button><i class="fa fa-university" style="font-size:15px;color:#050ce6;"></i> Home</button></a>
-        <a href="@Url.Action("SubmitClaim", "Home")"><button><i class="fa fa-paper-plane" style="font-size:15px;color:#0919f6;"></i> Submit Claim</button></a>
-        <a href="@Url.Action("TrackClaim", "Home")"><button><i class="fa fa-line-chart" style="font-size:15px;color:#0919f6;"></i> Track Claim</button></a>
-        <a href="@Url.Action("PreApproved", "Home")"><button><i class="fa fa-share-square" style="font-size:15px;color:#0919f6;"></i> Pre-Approved Claim</button></a>
-        <a href="@Url.Action("Approved", "Home")"><button><i class="fa fa-rocket" style="font-size:15px;color:#0919f6;"></i> Approve Claim</button></a>
-        <i class="fa fa-user" style="
-  font-size: 15px;
-  color: #0919f6;
-  background-color: #e0e0e0;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-cursor:pointer;
-"></i>
+        @* All roles see Home *@
+        <a href="@Url.Action("Home", "Home")">
+            <button><i class="fa fa-university" style="font-size:15px;color:#050ce6;"></i> Home</button>
+        </a>
+
+        @* Lecturer sees Submit Claim and Track Claim *@
+        @if (role == "lecturer")
+        {
+            <a href="@Url.Action("SubmitClaim", "Home")">
+                <button><i class="fa fa-paper-plane" style="font-size:15px;color:#0919f6;"></i> Submit Claim</button>
+            </a>
+            <a href="@Url.Action("TrackClaim", "Home")">
+                <button><i class="fa fa-line-chart" style="font-size:15px;color:#0919f6;"></i> Track Claim</button>
+            </a>
+        }
+
+        @* Programme Coordinator sees Pre-Approved only *@
+        @if (role == "programme coordinator")
+        {
+            <a href="@Url.Action("PreApproved", "Home")">
+                <button><i class="fa fa-share-square" style="font-size:15px;color:#0919f6;"></i> Pre-Approved Claim</button>
+            </a>
+        }
+
+        @* Programme Manager sees Approve Claim only *@
+        @if (role == "programme manager")
+        {
+            <a href="@Url.Action("Approved", "Home")">
+                <button><i class="fa fa-rocket" style="font-size:15px;color:#0919f6;"></i> Approve Claim</button>
+            </a>
+        }
+
+        @* User icon visible to all *@
+       <a href="@Url.Action("Index","Home")"> <i   class="fa fa-user" style="
+            font-size: 15px;
+            color: #0919f6;
+            background-color: #e0e0e0;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor:pointer;
+        ">
+    
+    
+    </i>
+
+    </a>
     </div>
 </div>

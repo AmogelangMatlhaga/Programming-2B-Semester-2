@@ -1,4 +1,6 @@
 ﻿<!--icon link-->
+@model part1_poe.Models.submit_claims
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 
@@ -104,89 +106,80 @@
 </style>
 
 
-<!--creating an html form-->
 <div class="contain_claim">
-    <form class="claim_form">
+    <form class="claim_form" asp-action="SubmitClaim" method="post" enctype="multipart/form-data">
         <h2>
             <i class="fa fa-folder-open" style="font-size:5rem;color:#046df6;"></i><br />
             Submit Your Claim
         </h2>
+
         <div class="form-row">
             <div class="form-group">
-                <label>Number of Sessions:</label>
-                <input type="number" id="Sessions" onmouseout="total_calculate()" />
+                <label asp-for="Sessions"></label>
+                <input type="number" asp-for="Sessions" onmouseout="total_calculate()" class="form-control" />
+                <span asp-validation-for="Sessions" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label>Number of Hours:</label>
-                <input type="number" id="Hours" />
+                <label asp-for="Hours"></label>
+                <input type="number" asp-for="Hours" class="form-control" />
+                <span asp-validation-for="Hours" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>Rate Amount (R):</label>
-                <input type="number" id="Rate" onmouseout="total_calculate()" />
+                <label asp-for="Rate"></label>
+                <input type="number" asp-for="Rate" onmouseout="total_calculate()" class="form-control" />
+                <span asp-validation-for="Rate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label>Total Amount</label>
-                <input type="number" id="price" value="10" />
+                <label asp-for="TotalAmount"></label>
+                <input type="number" asp-for="TotalAmount" class="form-control" readonly />
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>Module Name</label>
-                <input type="text" id="module" />
+                <label asp-for="Module"></label>
+                <input type="text" asp-for="Module" class="form-control" />
+                <span asp-validation-for="Module" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label>Faculty Name</label>
-                <input type="text" id="faculty" />
+                <label asp-for="Faculty"></label>
+                <input type="text" asp-for="Faculty" class="form-control" />
+                <span asp-validation-for="Faculty" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>Upload Supporting Documents</label>
-                <input type="file" id="documents" />
+                <label asp-for="Documents"></label>
+                <input type="file" asp-for="Documents" class="form-control" />
+                <span asp-validation-for="Documents" class="text-danger"></span>
             </div>
         </div>
 
-        <input type="submit" value="submit claim" class="button_claim" />
 
+        <div class="form-row">
+            <div class="form-group">
+              
+                <span  class="text-danger">@ViewBag.message</span>
+            </div>
+        </div>
+        <input type="submit" value="Submit Claim" class="button_claim" />
     </form>
 </div>
-<!-- function to calculate the total amount -->
+
 <script>
-    function total_calculate(){
-    //alert("on calculate");
-    var sessionNumber = document.getElementById("Sessions").value;
-    var rateAmount = document.getElementById("Rate").value;
-    var Total = Number(sessionNumber) * Number(rateAmount);
-    document.getElementById("price").value = Total;
-
-    //alert(sessionNumber);
-
-    }
-
-    function total_rate(){
+    function total_calculate() {
+        var sessionNumber = document.getElementById("Sessions").value;
         var rateAmount = document.getElementById("Rate").value;
-        alert(rateAmount);
+        var Total = Number(sessionNumber) * Number(rateAmount);
+        document.getElementById("TotalAmount").value = Total;
     }
-
 </script>
 
-<!--Footer -->
-<div style="height: 6.5rem; width: 100%;"></div>
-<div class="footer">
-    <hr />
-    <h3>About Us</h3>
-    <p>At LayeredLogic,<br> We transform visions into reality through web applications and unwavering commitment to excellence.<br></p>
-    <div class="icons">
-        <i class="fa-brands fa-facebook"></i>
-        <i class="fa-brands fa-instagram"></i>
-        <i class="fa-brands fa-linkedin"></i>
-        <i class="fa-brands fa-telegram"></i>
-    </div>
-    <br />
-    copyright <i class="fa-regular fa-copyright"></i> 2025, Contract Monthly Claim System (CMCS) | Created by Matlhaga Amogelang
-</div>
+
+    <partial name="_ValidationScriptsPartial" />
+<!--Footer --> <div style="height: 6.5rem; width: 100%;"></div>
+<div class="footer"> <hr /> <h3>About Us</h3> <p>At LayeredLogic,<br> We transform visions into reality through web applications and unwavering commitment to excellence.<br></p> <div class="icons"> <i class="fa-brands fa-facebook"></i> <i class="fa-brands fa-instagram"></i> <i class="fa-brands fa-linkedin"></i> <i class="fa-brands fa-telegram"></i> </div> <br /> copyright <i class="fa-regular fa-copyright"></i> 2025, Contract Monthly Claim System (CMCS) | Created by Matlhaga Amogelang </div>

@@ -1,0 +1,262 @@
+﻿@model part1_poe.Models.LecturerClaimViewModel
+@Html.Partial("_menu")
+
+@using System.Text.Json
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<body class=" invoice-body">
+
+    <div class="container mt-4">
+        <h2 class="mb-4 text-primary">Invoices</h2>
+
+        <div class="row g-4 mb-4">
+
+            <div class="col-md-3">
+                <div class="card shadow-sm border-0 rounded-4 p-3 text-center">
+                    <i class="fa fa-users text-primary mb-2" style="font-size: 2rem;"></i>
+                    <h6 class="fw-bold">Lecturers</h6>
+                    <h3 class="fw-bold text-primary">@Model.LecturerIDs.Distinct().Count()</h3>
+                    <p class="text-muted small">Lecturers submitting claims</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card shadow-sm border-0 rounded-4 p-3 text-center">
+                    <i class="fa fa-file-lines text-success mb-2" style="font-size: 2rem;"></i>
+                    <h6 class="fw-bold">Total Claims</h6>
+                    <h3 class="fw-bold text-success">@Model.ClaimIDs.Count()</h3>
+                    <p class="text-muted small">All approved claims</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card shadow-sm border-0 rounded-4 p-3 text-center">
+                    <i class="fa fa-sack-dollar text-warning mb-2" style="font-size: 2rem;"></i>
+                    <h6 class="fw-bold">Total Payout</h6>
+                    <h3 class="fw-bold text-warning">
+                        @Model.TotalAmounts.Sum().ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("en-ZA"))
+                    </h3>
+                    <p class="text-muted small">Company expenditure</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card shadow-sm border-0 rounded-4 p-3 text-center">
+                    <i class="fa fa-chart-line text-danger mb-2" style="font-size: 2rem;"></i>
+                    <h6 class="fw-bold">Average Claim</h6>
+                    <h3 class="fw-bold text-danger">
+                        @Model.TotalAmounts.Average().ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("en-ZA"))
+                    </h3>
+                    <p class="text-muted small">Per claim cost</p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <table class="table table-hover table-bordered text-center shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>Lecturer</th>
+                    <th>Email</th>
+                    <th>Total Claims</th>
+                    <th>Total Amount</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var grouped = Model.LecturerIDs
+                    .Select((id, idx) => new
+                    {
+                        LecturerID = id,
+                        FullName = Model.FullNames[idx],
+                        Email = Model.Emails[idx],
+                        ClaimIndex = idx
+                    })
+                    .GroupBy(x => x.LecturerID);
+                }
+
+                @foreach (var lecturerGroup in grouped)
+                {
+                    var lecturerClaims = lecturerGroup.Select(g => new
+                    {
+                        ClaimID = Model.ClaimIDs[g.ClaimIndex],
+                        ModuleName = Model.ModuleNames[g.ClaimIndex],
+                        NumberOfSessions = Model.NumberOfSessions[g.ClaimIndex],
+                        NumberOfHours = Model.NumberOfHours[g.ClaimIndex],
+                        Rate = Model.Rates[g.ClaimIndex],
+                        TotalAmount = Model.TotalAmounts[g.ClaimIndex],
+                        FacultyName = Model.FacultyNames[g.ClaimIndex],
+                        SupportingDocument = Model.SupportingDocuments[g.ClaimIndex],
+                        ClaimStatus = Model.ClaimStatuses[g.ClaimIndex],
+                        CreatingDate = Model.CreatingDates[g.ClaimIndex]
+                    }).ToList();
+
+                    var totalAmount = lecturerClaims.Sum(c => c.TotalAmount);
+
+                    <tr>
+                        <td>@lecturerGroup.First().FullName</td>
+                        <td>@lecturerGroup.First().Email</td>
+                        <td>@lecturerClaims.Count</td>
+                        <td>R @totalAmount.ToString("r")</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm"
+                                    type="button"
+                                    data-claims='@Html.Raw(JsonSerializer.Serialize(lecturerClaims))'
+                                    onclick="openClaimsPopupFromData(this)">
+                                <i class="fa fa-eye"></i> View Claims
+                            </button>
+
+                            <button class="btn btn-success btn-sm"
+                                    type="button"
+                                    data-claims='@Html.Raw(JsonSerializer.Serialize(lecturerClaims))'
+                                    onclick="generateInvoice(JSON.parse(this.getAttribute('data-claims')))">
+                                <i class="fa fa-file-invoice"></i> Generate All Invoices
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="claimsPopup" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content shadow-lg rounded-4 border-0">
+                <div class="modal-header bg-primary text-white rounded-top-4">
+                    <h5 class="modal-title"><i class="fa fa-list"></i> Claims Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped text-center" id="claimsTable">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Claim ID</th>
+                                <th>Module</th>
+                                <th>Sessions</th>
+                                <th>Hours</th>
+                                <th>Rate</th>
+                                <th>Total</th>
+                                <th>Faculty</th>
+                                <th>Document</th>
+                                <th>Created On</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function openClaimsPopupFromData(btn) {
+            const claims = JSON.parse(btn.getAttribute('data-claims'));
+            const tbody = document.querySelector("#claimsTable tbody");
+            tbody.innerHTML = '';
+
+            claims.forEach(c => {
+                tbody.innerHTML += `<tr>
+                    <td>${c.ClaimID}</td>
+                    <td>${c.ModuleName}</td>
+                    <td>${c.NumberOfSessions}</td>
+                    <td>${c.NumberOfHours}</td>
+                    <td>R ${c.Rate.toFixed(2)}</td>
+                    <td>R ${c.TotalAmount.toFixed(2)}</td>
+                    <td>${c.FacultyName}</td>
+                    <td>
+                        ${c.SupportingDocument ?
+                            `<a href="/files/${c.SupportingDocument}" target="_blank" class="btn btn-info btn-sm">
+                                <i class="fa fa-file"></i> View
+                             </a>`
+                            : ''}
+                    </td>
+                    <td>${new Date(c.CreatingDate).toLocaleDateString()}</td>
+                    <td>
+                        <button class="btn btn-success btn-sm"
+                            onclick='generateInvoice([${JSON.stringify(c)}])'>
+                            <i class="fa fa-file-invoice"></i>
+                        </button>
+                    </td>
+                </tr>`;
+            });
+
+            new bootstrap.Modal(document.getElementById("claimsPopup")).show();
+        }
+
+        function generateInvoice(claims) {
+            const claimIDs = claims.map(c => c.ClaimID);
+
+            fetch('/Home/GenerateInvoice', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(claimIDs)
+            })
+            .then(res => res.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                window.open(url, '_blank');
+            })
+            .catch(err => console.error(err));
+        }
+    </script>
+</body>
+
+<style>
+    .invoice-body{
+        width: 100%;
+    }
+    /* Footer */
+    .footer {
+        width: 100%;
+        text-align: center;
+        padding: 2rem;
+        background-color: #0d1b2a;
+        color: white;
+        margin-top: 5rem;
+    }
+
+        .footer h3 {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer p {
+            font-size: 0.95rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem auto;
+            color: #dbe2ef;
+        }
+
+        .footer .icons i {
+            font-size: 1.2rem;
+            margin: 0 10px;
+            color: #3f88c5;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+            .footer .icons i:hover {
+                transform: scale(1.2);
+                color: #90e0ef;
+            }
+</style>
+
+<!--Footer -->
+<div style="height: 6.5rem; width: 100%;"></div>
+<div class="footer">
+    <hr /> <h3>About Us</h3>
+    <p>
+        At LayeredLogic,<br> We transform visions into reality through web applications and unwavering commitment to excellence.<br>
+    </p>
+    <div class="icons">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-linkedin"></i>
+        <i class="fa-brands fa-telegram"></i>
+    </div> <br />
+    copyright <i class="fa-regular fa-copyright"></i> 2025, Contract Monthly Claim System (CMCS) | Created by Matlhaga Amogelang
+</div>
